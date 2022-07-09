@@ -12,13 +12,14 @@ int main ( void ) {
 
 	for(int i = 0; i < height; ++i){
 		for(int j = 0; j < width; ++j){
+			//Make coresponding complex number
 			complex<double> z ((((double)j)*4/width)-2,
 					((((double)i)*4/height)-2));
+			//makes claculations 
 			Mandelbrot m (z);
-			int counter = 0;
-			while(m.IsInSet() && counter++ < 10){
-				m.OneStep();
-			}
+			m.Steps(10);
+
+			//outputs
 			cout << (!(m.IsInSet()) ? " " : "X") << flush;
 		}
 		cout << endl;

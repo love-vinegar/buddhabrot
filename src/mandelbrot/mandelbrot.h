@@ -16,7 +16,9 @@ class Mandelbrot{
 		}
 
 		void OneStep();
+		bool Steps(int);
 		bool IsInSet();
+		complex<double> GetValue();
 
 	private:
 	complex<double> z,c;
