@@ -2,6 +2,7 @@
 #include <complex>
 
 #include "mandelbrot/mandelbrot.h"
+#include "bitmap/bitmap.h"
 
 using namespace std;
 using namespace std::complex_literals;
@@ -10,6 +11,8 @@ int main ( void ) {
 	int width = 50;
 	int height = 50;
 
+	Bitmap bm (50);
+	
 	for(int i = 0; i < height; ++i){
 		for(int j = 0; j < width; ++j){
 			//Make coresponding complex number
@@ -20,10 +23,10 @@ int main ( void ) {
 			m.Steps(10);
 
 			//outputs
-			cout << (!(m.IsInSet()) ? " " : "X") << flush;
+			bm.Set(i,j,m.IsInSet());
 		}
-		cout << endl;
 	}
+	cout << bm << endl;
 }
 
 

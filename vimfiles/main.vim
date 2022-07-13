@@ -110,7 +110,8 @@ setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
-setlocal nonumber
+set number
+setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
@@ -165,11 +166,11 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 26) / 53)
+let s:l = 8 - ((7 * winheight(0) + 26) / 53)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 8
 normal! 0
 tabnext
 edit src/mandelbrot/mandelbrot.cpp
@@ -267,7 +268,8 @@ setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
-setlocal nonumber
+set number
+setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
@@ -322,16 +324,17 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 26) / 52)
+let s:l = 8 - ((7 * winheight(0) + 26) / 52)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 0
+keepjumps 8
+normal! 09|
 wincmd w
 argglobal
 2argu
 if bufexists("src/mandelbrot/mandelbrot.h") | buffer src/mandelbrot/mandelbrot.h | else | edit src/mandelbrot/mandelbrot.h | endif
+balt src/mandelbrot/mandelbrot.cpp
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -405,7 +408,8 @@ setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
 setlocal modifiable
 setlocal nrformats=bin,octal,hex
-setlocal nonumber
+set number
+setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
 setlocal path=
@@ -460,21 +464,20 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 26) / 52)
+let s:l = 7 - ((6 * winheight(0) + 26) / 52)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 7
 normal! 0
 lcd /media/david/2Tb\ drive/programovani/inC++/buddhabrot
 wincmd w
-2wincmd w
 exe 'vert 1resize ' . ((&columns * 135 + 105) / 211)
 exe 'vert 2resize ' . ((&columns * 75 + 105) / 211)
-tabnext 2
+tabnext 1
 set stal=1
 badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/vimfiles/mandelbrot.vim
-badd +0 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/main.cpp
+badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/main.cpp
 badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/mandelbrot/mandelbrot.cpp
 badd +0 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/mandelbrot/mandelbrot.h
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
