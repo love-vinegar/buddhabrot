@@ -3,6 +3,8 @@
 void Bitmap::Set(int x, int y, int item){
 	if(x < size && y < size && x >= 0 && y >= 0){
 		arr[x][y] = item;	
+		if(item > max)
+			max = item;
 	}
 }
 
@@ -37,9 +39,10 @@ void Bitmap::OutputToFile(string path){
 	for(int i = 0; i < size ; ++ i) {
 		for(int j = 0; j < size; ++ j){
 
-			r = g = b = 255;
-			if (arr[i][j] != 0)
-				r = g = b = 0;
+			if(arr[i][j] < 255)
+				r = g = b = arr[i][j];
+			else
+				r = g = b = 255;
 
 			img << r << " " << g << " " << b << endl;
 		}
@@ -48,3 +51,11 @@ void Bitmap::OutputToFile(string path){
 	system(ss.c_str()); // for testing purpuces
 }
 
+void Bitmap::Increse(int x, int y, int n){
+	if(x < size && y < size && x >= 0 && y >= 0){
+		arr[x][y] += n;
+		if(arr[x][y] > max){
+			max = arr[x][y];
+		}
+	}
+}
