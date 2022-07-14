@@ -18,6 +18,8 @@ set nomodeline
 set printoptions=paper:a4
 set ruler
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+set winminheight=0
+set winminwidth=0
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -172,7 +174,7 @@ if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 7
-normal! 037|
+normal! 01|
 tabnext
 edit src/mandelbrot/mandelbrot.cpp
 let s:save_splitbelow = &splitbelow
@@ -493,9 +495,10 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 135 + 105) / 211)
-exe 'vert 2resize ' . ((&columns * 75 + 105) / 211)
+exe 'vert 1resize ' . ((&columns * 129 + 105) / 211)
+exe 'vert 2resize ' . ((&columns * 81 + 105) / 211)
 argglobal
+1argu
 if bufexists("/media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.cpp") | buffer /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.cpp | else | edit /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.cpp | endif
 setlocal keymap=
 setlocal noarabic
@@ -626,16 +629,18 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 26) / 52)
+let s:l = 29 - ((28 * winheight(0) + 26) / 52)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 29
 normal! 0
 lcd /media/david/2Tb\ drive/programovani/inC++/buddhabrot
 wincmd w
 argglobal
+1argu
 if bufexists("/media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.h") | buffer /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.h | else | edit /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.h | endif
+balt /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.cpp
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -765,25 +770,26 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 26) / 52)
+let s:l = 23 - ((22 * winheight(0) + 26) / 52)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 0
+keepjumps 23
+normal! 047|
 lcd /media/david/2Tb\ drive/programovani/inC++/buddhabrot
 wincmd w
-exe 'vert 1resize ' . ((&columns * 135 + 105) / 211)
-exe 'vert 2resize ' . ((&columns * 75 + 105) / 211)
+exe 'vert 1resize ' . ((&columns * 129 + 105) / 211)
+exe 'vert 2resize ' . ((&columns * 81 + 105) / 211)
 tabnext 3
 set stal=1
+badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/vimfiles/main.vim
 badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/vimfiles/mandelbrot.vim
 badd +7 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/main.cpp
 badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/mandelbrot/mandelbrot.cpp
-badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/mandelbrot/mandelbrot.h
-badd +0 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/a.out
 badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.cpp
-badd +0 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.h
+badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/mandelbrot/mandelbrot.h
+badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/src/bitmap/bitmap.h
+badd +1 /media/david/2Tb\ drive/programovani/inC++/buddhabrot/a.out
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
   silent exe 'bwipe ' . s:wipebuf
 endif

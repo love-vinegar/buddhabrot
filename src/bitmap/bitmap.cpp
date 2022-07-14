@@ -22,7 +22,29 @@ ostream& operator<<(ostream& os, const Bitmap& dt)
 		os << endl;
 	}
 
-    return os;
+	return os;
 }
 
+void Bitmap::OutputToFile(string path){
+
+	ofstream img (path);
+	img << "P3" << endl;
+	img << size << " " << size << endl;
+	img << 255 << endl;
+
+	int r, g, b;
+
+	for(int i = 0; i < size ; ++ i) {
+		for(int j = 0; j < size; ++ j){
+
+			r = g = b = 255;
+			if (arr[i][j] != 0)
+				r = g = b = 0;
+
+			img << r << " " << g << " " << b << endl;
+		}
+	}
+	string ss = "open " + path;
+	system(ss.c_str()); // for testing purpuces
+}
 

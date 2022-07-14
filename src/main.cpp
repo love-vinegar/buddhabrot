@@ -8,25 +8,25 @@ using namespace std;
 using namespace std::complex_literals;
 
 int main ( void ) { 
-	int width = 50;
-	int height = 50;
+	int width = 1024;
 
-	Bitmap bm (50);
+	Bitmap bm (width);
 	
-	for(int i = 0; i < height; ++i){
+	for(int i = 0; i < width; ++i){
 		for(int j = 0; j < width; ++j){
 			//Make coresponding complex number
 			complex<double> z ((((double)j)*4/width)-2,
-					((((double)i)*4/height)-2));
+					((((double)i)*4/width)-2));
+
 			//makes claculations 
 			Mandelbrot m (z);
-			m.Steps(10);
+			m.Steps(25);
 
 			//outputs
 			bm.Set(i,j,m.IsInSet());
 		}
 	}
-	cout << bm << endl;
+	bm.OutputToFile("test.ppm");
 }
 
 
