@@ -39,10 +39,14 @@ void Bitmap::OutputToFile(string path){
 	for(int i = 0; i < size ; ++ i) {
 		for(int j = 0; j < size; ++ j){
 
+			/*
+			//tohle je osklive reseni a melo by nemit hard cap 
 			if(arr[i][j] < 255)
 				r = g = b = arr[i][j];
 			else
 				r = g = b = 255;
+				*/
+			r = g = b = ((double)arr[i][j] / (double)max) * (double)255;
 
 			img << r << " " << g << " " << b << endl;
 		}
