@@ -14,22 +14,31 @@ class Bitmap{
 		Bitmap(int size){	
 			max = 0;
 			this->size = size;
-			arr = new int*[size];
+			arr = new unsigned int*[size];
 			for(int i = 0; i <size; ++i){
-				arr[i] = new int[size];
+				arr[i] = new unsigned int[size];
 				for(int j = 0; j < size; ++ j){
 					arr[i][j] = 0;
 				}
 			}
 			
 		}
-		void Set(int, int, int);
+
+		~Bitmap(){
+			for(int i = 0; i < size; ++ i){
+				delete[] arr[i];
+			}
+			delete [] arr;
+		}
+
+		void Set(int, int, unsigned int);
 		int Get(int, int) const;
 		friend ostream& operator<<(ostream& os, const Bitmap& dt);
 		void OutputToFile(string path);
 		void Increse(int, int , int);
 	private:
-		int** arr;	
-		int max;
+		void printProgress(int);
+		unsigned int** arr;	
+		unsigned int max;
 };
 #endif

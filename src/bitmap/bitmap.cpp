@@ -1,6 +1,20 @@
 #include "bitmap.h"
 
-void Bitmap::Set(int x, int y, int item){
+void Bitmap::printProgress(int percentage) {
+	cout << "\r";
+	cout << "[";
+	for(int i = 0 ; i < 100; ++ i ){
+		if( i < percentage)
+		cout << "#";
+		else
+		cout << " ";
+	}
+	cout << "] " << percentage << "%";
+	
+	cout << flush;
+}
+
+void Bitmap::Set(int x, int y,unsigned int item){
 	if(x < size && y < size && x >= 0 && y >= 0){
 		arr[x][y] = item;	
 		if(item > max)
@@ -35,22 +49,23 @@ void Bitmap::OutputToFile(string path){
 	img << 255 << endl;
 
 	int r, g, b;
-
+	int perc = -1;
+	cout << "outputing picture" << endl;
 	for(int i = 0; i < size ; ++ i) {
+
 		for(int j = 0; j < size; ++ j){
-
-			/*
-			//tohle je osklive reseni a melo by nemit hard cap 
-			if(arr[i][j] < 255)
-				r = g = b = arr[i][j];
-			else
-				r = g = b = 255;
-				*/
-			r = g = b = ((double)arr[i][j] / (double)max) * (double)255;
-
+			r = g = b = (((double)255) / max) * arr[j][i]; 
 			img << r << " " << g << " " << b << endl;
 		}
+
+		if(perc != (100 * i) / size){
+			perc = (100 * i) / size;
+			printProgress(perc);
+		}
 	}
+	printProgress(100);
+	cout << endl << "all finished" << endl;
+
 	string ss = "open " + path;
 	system(ss.c_str()); // for testing purpuces
 }

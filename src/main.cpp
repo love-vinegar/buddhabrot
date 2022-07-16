@@ -7,55 +7,60 @@
 using namespace std;
 using namespace std::complex_literals;
 
+void iprintProgress(int percentage) {
+	cout << "\r";
+	cout << "[";
+	for(int i = 0 ; i < 100; ++ i ){
+		if( i < percentage)
+		cout << "#";
+		else
+		cout << " ";
+	}
+	cout << "] " << percentage << "%";
+	
+	cout << flush;
+}
+
 int main ( void ) { 
-	int width = 512;
+	int width = 1024;
+	int lastperc = -1;
 
 	Bitmap bm (width);
 
-	for(int i = 0; i < width; ++i){
-		for(int j = 0; j < width; ++j){
-			//Make coresponding complex number
-			complex<double> z ((((double)j)*4/width)-2,
-					((((double)i)*4/width)-2));
+	cout << "starting heatmap generation" << endl;
 
-			//makes claculations 
-			Mandelbrot m (z);
-			vector<complex<double>> path = m.Steps(1000);
+	 long long int sample = width * width * 100;
+	 int iterat = 10000;
 
-			if(!m.IsInSet()){
-				for(auto & item : path){
-					//je asi chyba v zaokrouhlovani 
-					int x,y;
-					y = ((real(item) +2 )* width)/4;
-					x = ((imag(item) +2 )* width)/4;
+	for(long long int i = 0; i < sample; ++i){
+		int max = 1000000;
+		double randomy = ((double)(rand() % max) / (double)max)* 4 - 2;
+		double randomx = ((double)(rand() % max) / (double)max)* 4 - 2;
+		complex<double> z (randomx, randomy);
 
-					bm.Increse(x,y,1);
-				}
+		Mandelbrot m (z);
+		vector<complex<double>> path = m.Steps(iterat);
+
+		if(!m.IsInSet()){
+			for(auto & item : path){
+				//je asi chyba v zaokrouhlovani 
+				int x,y;
+				y = ((real(item) +2 )* width)/4;
+				x = ((imag(item) +2 )* width)/4;
+
+				bm.Increse(x,y,1);
 			}
 		}
+		
+		if(lastperc != (i *100) / sample) {
+			lastperc = (i * 100) / sample;
+			iprintProgress(lastperc);
+		}
 	}
-	/*
-	   for( int i = 0; i < 1000; i++){
-	   int max = 1000000;
-	   double randomy = ((double)(rand() % max) / (double)max)* 4 - 2;
-	   double randomx = ((double)(rand() % max) / (double)max)* 4 - 2;
-	   complex<double> z (randomx, randomy);
+	
+	iprintProgress(100);
+	cout << endl << "heat map done" << endl;
 
-	   Mandelbrot m (z);
-	   vector<complex<double>> path = m.Steps(1000);
-
-	   if(!m.IsInSet()){
-	   for(auto & item : path){
-	//je asi chyba v zaokrouhlovani 
-	int x,y;
-	y = ((real(item) +2 )* width)/4;
-	x = ((imag(item) +2 )* width)/4;
-
-	bm.Increse(x,y,1);
-	}
-	}
-	}
-	 */
 	bm.OutputToFile("test.ppm");
 }
 
