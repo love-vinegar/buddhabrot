@@ -3,4 +3,5 @@ bin/*
 
 *.swp
 *.ppm
+*.vim
 vimfiles/*
