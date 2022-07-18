@@ -22,14 +22,14 @@ void iprintProgress(int percentage) {
 }
 
 int main ( void ) { 
-	int width = 255;
+	int width = 512;
 	int lastperc = -1;
 
 
 	cout << "starting heatmap generation" << endl;
 
-	long long int sample = width * width * 100;
-	int iterations[3]=  {20,100,1000};
+	long long int sample = width * width * 300;
+	int iterations[3]=  {5000,500,50};
 	Bitmap R (width);
 	Bitmap G (width);
 	Bitmap B (width);
@@ -37,7 +37,7 @@ int main ( void ) {
 
 
 	for(int j = 0; j < 3; ++j){
-		cout << endl <<  j << " iteration" << endl;
+		cout << endl <<  iterations[j] << " iterations" << endl;
 		for(long long int i = 0; i < sample; ++i){
 			int max = 1000000;
 			double randomy = ((double)(rand() % max) / (double)max)* 4 - 2;
