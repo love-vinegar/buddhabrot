@@ -12,56 +12,64 @@ void iprintProgress(int percentage) {
 	cout << "[";
 	for(int i = 0 ; i < 100; ++ i ){
 		if( i < percentage)
-		cout << "#";
+			cout << "#";
 		else
-		cout << " ";
+			cout << " ";
 	}
 	cout << "] " << percentage << "%";
-	
+
 	cout << flush;
 }
 
 int main ( void ) { 
-	int width = 1024;
+	int width = 255;
 	int lastperc = -1;
 
-	Bitmap bm (width);
 
 	cout << "starting heatmap generation" << endl;
 
-	 long long int sample = width * width * 100;
-	 int iterat = 10000;
+	long long int sample = width * width * 100;
+	int iterations[3]=  {20,100,1000};
+	Bitmap R (width);
+	Bitmap G (width);
+	Bitmap B (width);
+	Bitmap* bm[3] = {&R, &G, &B};
 
-	for(long long int i = 0; i < sample; ++i){
-		int max = 1000000;
-		double randomy = ((double)(rand() % max) / (double)max)* 4 - 2;
-		double randomx = ((double)(rand() % max) / (double)max)* 4 - 2;
-		complex<double> z (randomx, randomy);
 
-		Mandelbrot m (z);
-		vector<complex<double>> path = m.Steps(iterat);
+	for(int j = 0; j < 3; ++j){
+		cout << endl <<  j << " iteration" << endl;
+		for(long long int i = 0; i < sample; ++i){
+			int max = 1000000;
+			double randomy = ((double)(rand() % max) / (double)max)* 4 - 2;
+			double randomx = ((double)(rand() % max) / (double)max)* 4 - 2;
+			complex<double> z (randomx, randomy);
 
-		if(!m.IsInSet()){
-			for(auto & item : path){
-				//je asi chyba v zaokrouhlovani 
-				int x,y;
-				y = ((real(item) +2 )* width)/4;
-				x = ((imag(item) +2 )* width)/4;
+			Mandelbrot m (z);
+			vector<complex<double>> path = m.Steps(iterations[j]);
 
-				bm.Increse(x,y,1);
+			if(!m.IsInSet()){
+				for(auto & item : path){
+					int x,y;
+					y = ((real(item) +2 )* width)/4;
+					x = ((imag(item) +2 )* width)/4;
+
+					bm[j]->Increse(x,y,1);
+				}
+			}
+
+			if(lastperc != (i *100) / sample) {
+				lastperc = (i * 100) / sample;
+				iprintProgress(lastperc);
 			}
 		}
-		
-		if(lastperc != (i *100) / sample) {
-			lastperc = (i * 100) / sample;
-			iprintProgress(lastperc);
-		}
+		iprintProgress(100);
 	}
-	
-	iprintProgress(100);
-	cout << endl << "heat map done" << endl;
 
-	bm.OutputToFile("test.ppm");
+	cout << endl << "heat map done" << endl;
+	
+	Bitmap::OutputRGB(R, G, B, "test.ppm");
+
+	//bm.OutputToFile("test.ppm");
 }
 
 

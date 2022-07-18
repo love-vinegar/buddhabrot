@@ -78,3 +78,32 @@ void Bitmap::Increse(int x, int y, int n){
 		}
 	}
 }
+void Bitmap::OutputRGB(Bitmap& R, Bitmap& G, Bitmap& B, string path){
+	ofstream img (path);
+	img << "P3" << endl;
+	img << R.size << " " << R.size << endl;
+	img << 255 << endl;
+
+	int r, g, b;
+	int perc = -1;
+	cout << "outputing picture" << endl;
+	for(int i = 0; i < R.size ; ++ i) {
+		for(int j = 0; j < R.size; ++ j){
+			r = (((double)255) / R.max) * R.Get(j,i); 
+			g = (((double)255) / G.max) * G.Get(j,i); 
+			b = (((double)255) / B.max) * B.Get(j,i); 
+			img << r << " " << g << " " << b << endl;
+		}
+
+		if(perc != (100 * i) / R.size){
+			perc = (100 * i) / R.size;
+			printProgress(perc);
+		}
+	}
+	printProgress(100);
+	cout << endl << "all finished" << endl;
+
+	string ss = "open " + path;
+
+	system(ss.c_str()); // for testing purpuces
+}

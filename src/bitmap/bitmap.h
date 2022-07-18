@@ -36,9 +36,10 @@ class Bitmap{
 		friend ostream& operator<<(ostream& os, const Bitmap& dt);
 		void OutputToFile(string path);
 		void Increse(int, int , int);
-	private:
-		void printProgress(int);
-		unsigned int** arr;	
+		static void OutputRGB(Bitmap& R, Bitmap& G, Bitmap& B, string path);
 		unsigned int max;
+	private:
+		static void printProgress(int);
+		unsigned int** arr;	
 };
 #endif
