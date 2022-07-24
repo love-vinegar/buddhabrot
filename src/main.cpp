@@ -22,7 +22,7 @@ void iprintProgress(int percentage) {
 }
 
 int main ( void ) { 
-	int width = 512;
+	int width = 128;
 	int lastperc = -1;
 
 
@@ -35,6 +35,7 @@ int main ( void ) {
 	Bitmap B (width);
 	Bitmap* bm[3] = {&R, &G, &B};
 
+	complex<double> juliaSeed (-1, 0);
 
 	for(int j = 0; j < 3; ++j){
 		cout << endl <<  iterations[j] << " iterations" << endl;
@@ -44,7 +45,7 @@ int main ( void ) {
 			double randomx = ((double)(rand() % max) / (double)max)* 4 - 2;
 			complex<double> z (randomx, randomy);
 
-			Mandelbrot m (z);
+			Mandelbrot m (z, juliaSeed);
 			vector<complex<double>> path = m.Steps(iterations[j]);
 
 			if(!m.IsInSet()){
@@ -67,8 +68,8 @@ int main ( void ) {
 
 	cout << endl << "heat map done" << endl;
 	
-	//Bitmap::OutputRGB(R, G, B, "test.ppm");
-	Bitmap::OutputHSV(R, G, B, "test.ppm");
+	Bitmap::OutputRGB(R, G, B, "test.ppm");
+	//Bitmap::OutputHSV(R, G, B, "test.ppm");
 
 	//bm.OutputToFile("test.ppm");
 }
