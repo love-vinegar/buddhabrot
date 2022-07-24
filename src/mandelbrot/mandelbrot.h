@@ -22,6 +22,7 @@ class Mandelbrot{
 		bool IsInSet();
 		complex<double> GetValue();
 		int GetSteps();
+		double SquereAbs(complex<double>);
 
 	private:
 	complex<double> z,c;

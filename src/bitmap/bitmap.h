@@ -37,8 +37,10 @@ class Bitmap{
 		void OutputToFile(string path);
 		void Increse(int, int , int);
 		static void OutputRGB(Bitmap& R, Bitmap& G, Bitmap& B, string path);
+		static void OutputHSV(Bitmap& R, Bitmap& G, Bitmap& B, string path);
 		unsigned int max;
 	private:
+		static void HSVtoRGB(double,double,double,double&,double&,double&);
 		static void printProgress(int);
 		unsigned int** arr;	
 };

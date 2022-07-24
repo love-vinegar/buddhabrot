@@ -28,8 +28,8 @@ int main ( void ) {
 
 	cout << "starting heatmap generation" << endl;
 
-	long long int sample = width * width * 300;
-	int iterations[3]=  {5000,500,50};
+	long long int sample = width * width * 1000;
+	int iterations[3]=  {500,5000,50};
 	Bitmap R (width);
 	Bitmap G (width);
 	Bitmap B (width);
@@ -67,7 +67,8 @@ int main ( void ) {
 
 	cout << endl << "heat map done" << endl;
 	
-	Bitmap::OutputRGB(R, G, B, "test.ppm");
+	//Bitmap::OutputRGB(R, G, B, "test.ppm");
+	Bitmap::OutputHSV(R, G, B, "test.ppm");
 
 	//bm.OutputToFile("test.ppm");
 }

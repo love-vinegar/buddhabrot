@@ -1,23 +1,21 @@
 #include "mandelbrot.h"
 
-void Mandelbrot::OneStep(){
-	z = pow(z, 2) + c;
-}
-
 bool Mandelbrot::IsInSet(){
-	return (abs(z) < 2);	
+	return (SquereAbs(z) < 4);	
 }
 
 vector<complex<double>> Mandelbrot::Steps(int NumberOfSteps){
 	vector<complex<double>> ret;
 	for(int i = 0; i < NumberOfSteps; ++i){
 		ret.push_back(z);
-		
+
 		if(!IsInSet()){
 			NofSteps = i;
 			return ret;
 		}
-		OneStep();
+		complex<double> temp ((real(z) * real(z)) - (imag(z) * imag(z)) + real(c),
+				(2 * real(z) * imag(z)) + imag(c));
+		z = temp;
 	}
 
 	NofSteps = NumberOfSteps;
@@ -30,4 +28,8 @@ complex<double> Mandelbrot::GetValue(){
 
 int Mandelbrot::GetSteps(){
 	return NofSteps;
+}
+
+double Mandelbrot::SquereAbs(complex<double> x){
+	return real(x) * real(x) + imag(x) * imag(x);	
 }
