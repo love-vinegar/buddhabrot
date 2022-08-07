@@ -35,7 +35,7 @@ int main ( void ) {
 	Bitmap B (width);
 	Bitmap* bm[3] = {&R, &G, &B};
 
-	complex<double> juliaSeed (-1, 0);
+	complex<double> juliaSeed (-0.8, 0.156);
 
 	for(int j = 0; j < 3; ++j){
 		cout << endl <<  iterations[j] << " iterations" << endl;
@@ -45,7 +45,8 @@ int main ( void ) {
 			double randomx = ((double)(rand() % max) / (double)max)* 4 - 2;
 			complex<double> z (randomx, randomy);
 
-			Mandelbrot m (z, juliaSeed);
+			//Mandelbrot m (z, juliaSeed);
+			Mandelbrot m (z);
 			vector<complex<double>> path = m.Steps(iterations[j]);
 
 			if(!m.IsInSet()){
@@ -68,8 +69,9 @@ int main ( void ) {
 
 	cout << endl << "heat map done" << endl;
 	
+//	Bitmap::OutputRGB(R, R, R, "test.ppm");
 	Bitmap::OutputRGB(R, G, B, "test.ppm");
-	//Bitmap::OutputHSV(R, G, B, "test.ppm");
+//	Bitmap::OutputHSV(R, G, B, "test.ppm");
 
 	//bm.OutputToFile("test.ppm");
 }

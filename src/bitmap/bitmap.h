@@ -32,16 +32,19 @@ class Bitmap{
 		}
 
 		void Set(int, int, unsigned int);
-		int Get(int, int) const;
+		unsigned int Get(int, int) const;
 		friend ostream& operator<<(ostream& os, const Bitmap& dt);
-		void OutputToFile(string path);
 		void Increse(int, int , int);
 		static void OutputRGB(Bitmap& R, Bitmap& G, Bitmap& B, string path);
 		static void OutputHSV(Bitmap& R, Bitmap& G, Bitmap& B, string path);
 		unsigned int max;
 	private:
+		unsigned int** arr;	
+
 		static void HSVtoRGB(double,double,double,double&,double&,double&);
 		static void printProgress(int);
-		unsigned int** arr;	
+		static double LinearNormalization(unsigned int, unsigned int, double);
+		static double LogNormalization(unsigned int, unsigned int, double, unsigned int);
+		unsigned int FindSmallest();
 };
 #endif
