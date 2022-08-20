@@ -80,9 +80,10 @@ void Bitmap::OutputRGB(Bitmap& R, Bitmap& G, Bitmap& B, string path){
 	cout << "outputing picture" << endl;
 	for(int i = 0; i < R.size ; ++ i) {
 		for(int j = 0; j < R.size; ++ j){
-			//r = LinearNormalization(R.Get(j,i), R.max, 255); 
-			//g = LinearNormalization(G.Get(j,i), G.max, 255); 
-			//b = LinearNormalization(B.Get(j,i), B.max, 255); 
+
+//			r = LinearNormalization(R.Get(j,i), R.max, 255); 
+//			g = LinearNormalization(G.Get(j,i), G.max, 255); 
+//			b = LinearNormalization(B.Get(j,i), B.max, 255); 
 
 			r = LogNormalization(R.Get(j,i), R.max, 255, smallestR); 
 			g = LogNormalization(G.Get(j,i), G.max, 255, smallestG); 

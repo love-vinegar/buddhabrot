@@ -28,7 +28,7 @@ int main ( void ) {
 
 	cout << "starting heatmap generation" << endl;
 
-	long long int sample = width * width * 1000;
+	long long int sample = width * width * 100;
 	int iterations[3]=  {500,5000,50};
 	Bitmap R (width);
 	Bitmap G (width);
